@@ -11,3 +11,17 @@ day_num = calendar.weekday(year,mnth,date)
 days = ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", 
                          "FRIDAY", "SATURDAY", "SUNDAY"] 
 print(days[day_num])                         
+
+
+
+
+sol ::
+    
+import datetime    
+mnth,date,year = int(raw_input().split())
+mnth=int(mnth)
+date=int(date)
+year=int(year)
+    
+main_date = datetime.date(year,mnth,date)
+main_date.strptime("%A")
