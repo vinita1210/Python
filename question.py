@@ -16,38 +16,47 @@ sol:
 def decodeString(s):
     d =0
     start = 0
+    c=0
     print(s)
     value = ''
     for i in range(len(s)):
         d = 0
         if s[i] == '[':
+            
             if start == 0:
                 value = value + s[0:i-1]
-            b = s[i-1]
+            
             #print b
-            start_index = i + 1
-            print ("start_index:" +  str(start_index))
-            #d=0
-            start+=1
+            if c == 0 :
+                b = s[i-1]
+                start_index = i + 1
+                #print ("start_index:" +  str(start_index))
+                #d=0
+                start+=1
+            c = c + 1
         elif s[i] == ']':
+            c = c-1
             close_index = i 
-            print ("close_index:" + str(close_index))
+            #print ("close_index:" + str(close_index))
             d = d+1
         if d != 0:
             #print b
             for j in range(int(b)):
-                #print (s[start_index:close_index])
-                #print j
-                value = value + (s[start_index:close_index])
-                #print value
+                if c == 0:
+                    #print (s[start_index:close_index])
+                    #print j
+                    value = value + (s[start_index:close_index])
+                    #print value
     if close_index <= len(s) :
         value = value + s[close_index+1:]
         print(value)
         
-    
+    if '[' in value:
+        #print(value)
+        decodeString(value)
         
         
 
-a = "2[abc]3[cd]ef"        
+a = "3[a2[c]]"        
 #sol = Solution()       
 decodeString(a)       
