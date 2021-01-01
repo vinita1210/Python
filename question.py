@@ -19,6 +19,7 @@ def decodeString(s):
     c=0
     print(s)
     value = ''
+    close_index=0
     for i in range(len(s)):
         d = 0
         if s[i] == '[':
@@ -28,12 +29,25 @@ def decodeString(s):
             
             #print b
             if c == 0 :
-                b = s[i-1]
-                start_index = i + 1
-                #print ("start_index:" +  str(start_index))
-                #d=0
-                start+=1
+                if close_index == 0:
+                    b = s[i-1]
+                    start_index = i + 1
+                    #print ("start_index:" +  str(start_index))
+                    #d=0
+                    start+=1
+                else:
+                    b = s[i -1]
+                    #print "else" + str(close_index)
+                    start_index = i + 1
+                    mid_val = s[close_index + 1:start_index -2 ] 
+                    value = value + mid_val
+                    #print ("value_Chck" + mid_val)
+                    
+                    #print ("start_index:" +  str(start_index))
+                    #d=0
+                    start+=1
             c = c + 1
+            
         elif s[i] == ']':
             c = c-1
             close_index = i 
@@ -57,6 +71,6 @@ def decodeString(s):
         
         
 
-a = "3[a2[c]]"        
+a = "mon3[asun2[c]]mon"        
 #sol = Solution()       
 decodeString(a)       
