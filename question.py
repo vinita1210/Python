@@ -10,7 +10,7 @@ Output: "abcabccdcdcdef"
 Input: s = "abc3[cd]xyz"
 Output: "abccdcdcdxyz"
 
-sol:
+sol1 :
 
 
 def decodeString(s):
@@ -74,3 +74,60 @@ def decodeString(s):
 a = "mon3[asun2[c]]mon"        
 #sol = Solution()       
 decodeString(a)       
+
+abc3[cd]xyz
+
+Sol 2:
+    
+class Solution:
+    def _init_(self): 
+        self.top = -1 
+        self.array = [] 
+        self.output = ''
+    def isEmpty(self): 
+        return True if self.top == -1 else False
+    
+    def pop(self): 
+        if not self.isEmpty(): 
+            self.top -= 1
+            return self.array.pop() 
+        else: 
+            return "0"
+    
+    def push(self, op): 
+        self.top += 1
+        self.array.append(op)
+    
+    def decodeString(self, s: str) -> str:
+        exp = s+']'
+        for x,i in enumerate(exp):
+            if i.isalpha(): 
+                self.output = self.output + i
+            elif i  == '[': 
+                self.output = self.output + i
+            elif i == ']':
+                a = self.pop()
+                if self.output.rfind('[') != -1:
+                    new_str = self.output[self.output.rfind('[')+1:]
+                    self.output = self.output[:self.output.rfind('[')]
+                    for _ in range(int(a)):
+                        self.output = self.output + new_str
+            else:
+                if exp[x-1].isdigit():
+                    continue
+                if exp[x+1].isdigit():
+                    if exp[x+2].isdigit():
+                        print(exp[x:x+3])
+                        self.push(exp[x:x+3])
+                    else:
+                        print(exp[x:x+2])
+                        self.push(exp[x:x+2])
+                else:
+                    self.push(i)
+  
+        answer = "".join(self.output)
+        return answer
+        
+abc3[cd]xyz        
+mon3[asun2[c]]mon
+        
