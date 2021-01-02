@@ -8,3 +8,14 @@ class Solution:
             value=value+ no[max_len - (i + 1)]
             
         return bool(value == no)
+
+class Solution(object):
+def isPalindrome(self, x):
+"""
+:type x: int
+:rtype: bool
+"""
+if "{}".format(x)=="{}".format(x)[::-1]:
+return True
+else:
+return False
